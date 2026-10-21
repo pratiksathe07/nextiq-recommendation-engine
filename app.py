@@ -449,7 +449,7 @@ elif selected_page == "🔍 Similar Products Discovery":
     # Catalog dropdown options with description and StockCode
     catalog_sorted = catalog_df.sort_values("total_quantity", ascending=False).reset_index(drop=True)
     product_options = [
-        f"{row[COL_STOCK_CODE]} — {row[COL_DESCRIPTION]} (£{row['avg_unit_price']:.2f})"
+        f"{row[COL_STOCK_CODE]} — {row[COL_DESCRIPTION]} ({CURRENCY_SYMBOL}{row['avg_unit_price']:.2f})"
         for _, row in catalog_sorted.iterrows()
     ]
 
@@ -470,7 +470,7 @@ elif selected_page == "🔍 Similar Products Discovery":
             <div class="kpi-value" style="font-size: 1.35rem;">{target_meta[COL_DESCRIPTION]}</div>
             <div class="kpi-subtext" style="color: #475569; margin-top: 0.5rem;">
                 StockCode: <b>{target_stock_code}</b> &nbsp;|&nbsp; 
-                Avg Unit Price: <b>£{target_meta['avg_unit_price']:.2f}</b> &nbsp;|&nbsp; 
+                Avg Unit Price: <b>{CURRENCY_SYMBOL}{target_meta['avg_unit_price']:.2f}</b> &nbsp;|&nbsp; 
                 Total Units Sold: <b>{int(target_meta['total_quantity']):,}</b> &nbsp;|&nbsp; 
                 Total Orders: <b>{int(target_meta['total_invoices']):,}</b>
             </div>
@@ -554,7 +554,7 @@ elif selected_page == "🌟 Popular Products Ranking":
         "Distinct Customer Count (Broadest Appeal)": ("customers", "Distinct Customers"),
         "Units Purchased (Total Volume)": ("quantity", "Units Purchased"),
         "Distinct Invoices (Order Frequency)": ("invoices", "Distinct Invoices"),
-        "Commercial Revenue (Gross Value)": ("revenue", "Revenue (£)"),
+        "Commercial Revenue (Gross Value)": ("revenue", f"Revenue ({CURRENCY_SYMBOL})"),
     }
     by_key, by_label = by_map[ranking_strategy]
 
@@ -750,7 +750,7 @@ elif selected_page == "📈 Commercial Business Insights":
         start_dt, end_dt = pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1]) + pd.Timedelta(days=1)
         filtered_df = filtered_df[(filtered_df[COL_INVOICE_DATE] >= start_dt) & (filtered_df[COL_INVOICE_DATE] <= end_dt)]
 
-    st.markdown(f"**Filtered Dataset:** {len(filtered_df):,} transactions (£{filtered_df[COL_REVENUE].sum():,.2f} revenue)")
+    st.markdown(f"**Filtered Dataset:** {len(filtered_df):,} transactions ({CURRENCY_SYMBOL}{filtered_df[COL_REVENUE].sum():,.2f} revenue)")
 
     # Geographic Breakdown & Pareto Curve
     b_col1, b_col2 = st.columns(2)

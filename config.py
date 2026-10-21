@@ -67,7 +67,7 @@ MIN_UNIT_PRICE: float = 0.001
 MIN_PURCHASE_QUANTITY: int = 1
 MIN_CUSTOMER_INTERACTIONS: int = 2
 MIN_ITEM_INTERACTIONS: int = 2
-CURRENCY_SYMBOL: str = "£"  # British Pound Sterling (official UCI dataset currency)
+CURRENCY_SYMBOL: str = "₹"  # Indian Rupee (₹)
 
 # Recommendation Model Parameters
 DEFAULT_TOP_K: int = 10

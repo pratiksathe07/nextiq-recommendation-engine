@@ -113,7 +113,7 @@ NextIQ is built using historical transactions from the **Online Retail Dataset**
 - `Description`: Product name / textual catalog metadata.
 - `Quantity`: Number of units purchased (negative values denote returns).
 - `InvoiceDate`: Timestamp of transaction generation.
-- `UnitPrice`: Product price in British Pounds Sterling (£).
+- `UnitPrice`: Product price in Rupees (₹).
 - `CustomerID`: 5-digit customer identifier (missing in guest checkouts).
 - `Country`: Geographic market of customer residence.
 

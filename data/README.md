@@ -20,7 +20,7 @@ NextIQ uses historical transaction records from the **Online Retail Dataset** do
 | `Description` | String | Product name/description. | Used for content-based TF-IDF features and catalog display. |
 | `Quantity` | Integer | Units per item per transaction. Negative values denote returns. | Filtered to positive quantities for purchase recommendations. |
 | `InvoiceDate` | Datetime | Date & timestamp of transaction (Dec 1, 2010 – Dec 9, 2011). | Converted to datetime for chronological offline splitting. |
-| `UnitPrice` | Float | Unit price in British Pounds Sterling (£). | Must be > 0. Used with Quantity to compute Revenue. |
+| `UnitPrice` | Float | Unit price in Rupees (₹). | Must be > 0. Used with Quantity to compute Revenue. |
 | `CustomerID` | String | 5-digit unique customer ID. Missing in guest checkouts. | Required for personalized CF; preserved for general sales analysis. |
 | `Country` | String | Country of customer residence (38 distinct countries). | Used for market segmentation and international trade analytics. |
 

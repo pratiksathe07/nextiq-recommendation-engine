@@ -86,10 +86,10 @@ def plot_monthly_sales_trend(sales_df: pd.DataFrame) -> go.Figure:
         go.Bar(
             x=monthly["YearMonth"],
             y=monthly["revenue"],
-            name="Revenue (£)",
+            name=f"Revenue ({CURRENCY_SYMBOL})",
             marker_color=BRAND_PRIMARY,
             opacity=0.85,
-            hovertemplate="<b>%{x}</b><br>Revenue: £%{y:,.2f}<extra></extra>",
+            hovertemplate=f"<b>%{{x}}</b><br>Revenue: {CURRENCY_SYMBOL}%{{y:,.2f}}<extra></extra>",
         ),
         secondary_y=False,
     )
@@ -115,7 +115,7 @@ def plot_monthly_sales_trend(sales_df: pd.DataFrame) -> go.Figure:
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         margin=dict(l=40, r=40, t=60, b=40),
     )
-    fig.update_yaxes(title_text="Revenue (£)", secondary_y=False, showgrid=True)
+    fig.update_yaxes(title_text=f"Revenue ({CURRENCY_SYMBOL})", secondary_y=False, showgrid=True)
     fig.update_yaxes(title_text="Total Orders", secondary_y=True, showgrid=False)
 
     return fig
@@ -127,14 +127,14 @@ def plot_top_products(sales_df: pd.DataFrame, by: str = "revenue", top_n: int = 
     Supported 'by': 'revenue', 'quantity', 'customers', 'invoices'.
     """
     metric_map = {
-        "revenue": (COL_REVENUE, "sum", "Revenue (£)", BRAND_PRIMARY, "£%{x:,.2f}"),
+        "revenue": (COL_REVENUE, "sum", f"Revenue ({CURRENCY_SYMBOL})", BRAND_PRIMARY, f"{CURRENCY_SYMBOL}%{{x:,.2f}}"),
         "quantity": (COL_QUANTITY, "sum", "Units Purchased", BRAND_SECONDARY, "%{x:,}"),
         "customers": (COL_CUSTOMER_ID, "nunique", "Distinct Customers", BRAND_ACCENT, "%{x:,}"),
         "invoices": (COL_INVOICE_NO, "nunique", "Distinct Orders", BRAND_SUCCESS, "%{x:,}"),
     }
 
     col, agg_fn, title_label, bar_color, hover_fmt = metric_map.get(
-        by, (COL_REVENUE, "sum", "Revenue (£)", BRAND_PRIMARY, "£%{x:,.2f}")
+        by, (COL_REVENUE, "sum", f"Revenue ({CURRENCY_SYMBOL})", BRAND_PRIMARY, f"{CURRENCY_SYMBOL}%{{x:,.2f}}")
     )
 
     grouped = (
@@ -215,18 +215,18 @@ def plot_country_sales_distribution(sales_df: pd.DataFrame, top_n: int = 10) -> 
         top_countries,
         x=COL_COUNTRY,
         y=COL_REVENUE,
-        title=f"<b>Top {top_n} Geographic Markets by Revenue (£)</b>",
+        title=f"<b>Top {top_n} Geographic Markets by Revenue ({CURRENCY_SYMBOL})</b>",
         template=PLOTLY_TEMPLATE,
         color=COL_REVENUE,
         color_continuous_scale="Purples",
     )
     fig.update_layout(
         xaxis_title="Country",
-        yaxis_title="Total Revenue (£)",
+        yaxis_title=f"Total Revenue ({CURRENCY_SYMBOL})",
         coloraxis_showscale=False,
         margin=dict(l=40, r=40, t=60, b=40),
     )
-    fig.update_traces(hovertemplate="<b>%{x}</b><br>Revenue: £%{y:,.2f}<extra></extra>")
+    fig.update_traces(hovertemplate=f"<b>%{{x}}</b><br>Revenue: {CURRENCY_SYMBOL}%{{y:,.2f}}<extra></extra>")
     return fig
 
 
